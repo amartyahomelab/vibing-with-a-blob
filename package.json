@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+  "preview": "vite preview",
+  "dev:bg": "bash -c 'nohup npm run dev >/dev/null 2>&1 & echo $! > .vite-dev.pid; echo Started Vite in background PID $(cat .vite-dev.pid)'",
+  "dev:stop": "sh -c 'if [ -f .vite-dev.pid ]; then PID=$(cat .vite-dev.pid); if kill $PID 2>/dev/null; then echo Stopped Vite PID $PID; else echo PID $PID not running; fi; rm -f .vite-dev.pid; else echo No PID file; fi'",
+  "dev:log": "tail -f vite-dev.log"
   },
   "dependencies": {
     "lit": "^3.3.0",
